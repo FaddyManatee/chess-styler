@@ -1,0 +1,22 @@
+body {
+    width: 200px;
+}
+
+button {
+    width: 49%;
+    display: inline-block;
+}
+
+.symbol {
+    font-size: 40px;
+}
+
+#reset {
+    width: 100%;
+    margin-top: 3px;
+    background-color: cornflowerblue;
+}
+
+#reset:hover {
+    background-color: tomato;
+}
