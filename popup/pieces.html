@@ -1,0 +1,25 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>chess.com/customize</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <a href="popup.html"><button id="back" title="Go back">Back</button></a>
+    <h1 class="title">Pieces</h1>
+    <p>Upload the folder containing your custom pieces.</p>
+    <p>Name files within this folder according to their colour and type:</p>
+    <ul>
+      <li>♚ = bk.png</li>
+      <li>♔ = wk.svg</li>
+      <li>♞ = bn.jpeg</li>
+      <li>♘ = wn.svg</li>
+      <li>♙ = wp.svg</li>
+      <li>etc...</li>
+    </ul>
+    <p>Accepted file types: .svg .png .jpeg</p>
+    <ul id="result"></ul>
+    <input id="upload-pieces" type="file" webkitdirectory directory>
+    <script type="text/javascript" src="script.js"></script>
+  </body>
+</html>

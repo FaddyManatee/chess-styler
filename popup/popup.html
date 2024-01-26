@@ -1,14 +1,16 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>chess.com/customize</title>
+    <title>Chess.com Styler</title>
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <div>
-      <button id="pieces" title="Pieces"><span class="symbol">♘</span></button>
-      <button id="board" title="Board"><span class="symbol">❏</span></button>
-      <button id="reset" title="Revert to your original chess.com theme">Reset</button>
+    <div id="option">
+      <a href="pieces.html"><button id="pieces" title="Customize pieces"><span class="symbol">♙♘♖♕♔</span></button></a>
+      <a href="board.html"><button id="board" title="Customize board"><span class="symbol">◼◻◼◻◼</span></button></a>
     </div>
+    <button id="reset" title="Revert to your original chess.com theme">Reset</button>
+    <p>Your pieces and board theme will be displayed here.</p>
+    <script type="text/javascript" src="script.js"></script>
   </body>
 </html>
