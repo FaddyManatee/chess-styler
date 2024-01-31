@@ -1,5 +1,5 @@
 {
-  "name": "chess.com/customize",
+  "name": "chess.com styler",
   "version": "0.0.0",
   "manifest_version": 3,
   "description": "An extension to customize your chess.com board and pieces.",
@@ -14,14 +14,18 @@
     "default_popup": "popup/popup.html"
   },
 
-  "permissions": [
+  "host_permissions": [
     "https://www.chess.com/*"
+  ],
+
+  "permissions": [
+    
   ],
 
   "content_scripts": [
     {
       "matches": ["https://www.chess.com/*"],
-      "js": ["popup/script.js"]
+      "js": ["extension/inject.js"]
     }
   ]  
 }
