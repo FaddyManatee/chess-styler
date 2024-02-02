@@ -4,16 +4,9 @@ body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-hr {
-    position: absolute;
-    width: 120%;
-    left: 0;
-    padding: 0;
-}
-
 label {
     font-size: 14px;
-    display: block;
+    /* display: block; */
 }
 
 p, ul {
@@ -29,11 +22,6 @@ ul {
     color: #00a300;
 }
 
-.board-customise .fill-option:nth-of-type(2n - 1) {
-    margin-bottom: 16px;
-}
-
-
 .piece {
     width: auto;
     height: auto;
@@ -48,6 +36,10 @@ ul {
 
 .skip {
     color: #daa520;
+}
+
+.square {
+    display: block;
 }
 
 .symbol {
@@ -66,23 +58,17 @@ ul {
     width: 50px;
 }
 
-#option {
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch;
-    column-gap: 4px;
+#pieces {
     width: 100%;
-}
-
-#option button {
-    flex: 1;
-    width: 100%;
-    height: 100%;
 }
 
 #preview-pieces {
     display: flex;
     flex-flow: row wrap;
+}
+
+#preview-pieces + .square {
+    margin: 10px 0;
 }
 
 #reset {
