@@ -31,8 +31,12 @@ document.getElementById("upload-pieces").addEventListener(
                 // Convert image to data URL.
                 reader.readAsDataURL(file);
                 reader.addEventListener("load", () => {
-                    // Save data URL to local storage.
-                    localStorage.setItem(id, reader.result);
+                    // Save data URL to chrome.storage.
+                    let obj = {};
+                    obj[id] = reader.result;
+                    chrome.storage.local.set(obj, function() {
+                        console.log('Value is set to ' + reader.result);
+                    });
                     log.innerHTML += "<li class=\"accept\">Accepted '" + file.name + "'</li>";
                 });
             }

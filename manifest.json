@@ -19,7 +19,8 @@
   ],
 
   "permissions": [
-    
+    "activeTab",
+    "storage"
   ],
 
   "content_scripts": [
