@@ -8,7 +8,7 @@ document.getElementById("upload-pieces").addEventListener(
         console.log(event.target.files.length);
 
         for (const file of event.target.files) {
-            let id = file.name.slice(0, 2);
+            let id = file.name.slice(0, 2).toLowerCase();
 
             if (!valid_pieces.includes(id)) {
                 log.innerHTML += "<li class=\"skip\">Skipped '" + file.name + "' (bad name)</li>";
