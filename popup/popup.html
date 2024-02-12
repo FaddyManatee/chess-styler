@@ -5,10 +5,24 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <a href="pieces.html"><button id="pieces" title="Customize pieces"><span class="symbol">♟︎♘♜♕♚</span></button></a>
-    <button id="reset" title="Revert to your original chess.com theme">Reset</button>
-    <p>Your pieces and board theme will be displayed here:</p>
     <div id="preview-pieces"></div>
+    <label>
+      <abbr title="
+Upload the folder containing your custom pieces.
+Name files within this folder according to their colour and type.
+Names don't have to be case sensitive.
+
+♚ = BK.png
+♔ = wk.svg
+♞ = bN.jpeg
+♘ = Wn.svg
+♙ = wp.svg
+etc...
+
+Accepted file types: .svg .png .jpeg">Pieces
+      </abbr>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&hairsp;&hairsp;&hairsp;&hairsp;
+    </label>
+    <input id="upload-pieces" type="file" webkitdirectory directory>
     <div class="square">
       <label>Dark Squares&hairsp;&hairsp;</label>
       <input type="color" title="Choose a colour for dark squares">
@@ -19,6 +33,7 @@
       <input type="color" title="Choose a colour for light squares">
       <input type="color" title="Choose a colour for light square coordinates">
     </div>
+    <button id="reset" title="Revert to your original chess.com theme">Reset</button>
     <script type="text/javascript" src="script.js"></script>
   </body>
 </html>
