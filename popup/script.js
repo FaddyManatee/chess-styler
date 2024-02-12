@@ -17,5 +17,10 @@ document.getElementById("reset").addEventListener(
     "click", 
     (event) => {
         chrome.storage.local.clear();
+        preview.innerHTML = "";
+
+        for (let i = 0; i < pieces.length; i++) {
+            preview.innerHTML += `<div class=\"piece\"><img src="../icons/empty.png"></div>`;
+        }
     }
 );
