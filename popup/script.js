@@ -15,6 +15,13 @@ function showPieces() {
     }
 }
 
+function showBoard() {
+    chrome.storage.local.get("board", function(result) {
+        let board = document.getElementById("board");
+        board.src = result.board;
+    });
+}
+
 document.getElementById("reset").addEventListener(
     "click", 
     (event) => {
@@ -30,20 +37,18 @@ document.getElementById("reset").addEventListener(
 document.getElementById("upload-pieces").addEventListener(
     "change",
     (event) => {
-        // let log = document.getElementById("result");
-
         for (const file of event.target.files) {
             let id = file.name.slice(0, 2).toLowerCase();
 
             if (!pieces.includes(id)) {
-                // log.innerHTML += "<li class=\"skip\">Skipped '" + file.name + "' (bad name)</li>";
+                //
             }
             else if (!file.name.includes(".png")  &&
                      !file.name.includes(".jpg")  &&
                      !file.name.includes(".jpeg") &&
                      !file.name.includes(".svg"))
             {
-                // log.innerHTML += "<li class=\"skip\">Skipped '" + file.name + "' (bad type)</li>";
+                //
             }
             else {
                 // Create a new FileReader for each file.
@@ -60,9 +65,8 @@ document.getElementById("upload-pieces").addEventListener(
                     let obj = {};
                     obj[id] = reader.result;
                     chrome.storage.local.set(obj, function() {
-                        // console.log("Value is set to " + reader.result);
+                        //
                     });
-                    // log.innerHTML += "<li class=\"accept\">Accepted '" + file.name + "'</li>";
                 });
             }
         }
@@ -72,6 +76,29 @@ document.getElementById("upload-pieces").addEventListener(
     false
 );
 
+document.getElementById("upload-board").addEventListener(
+    "change",
+    (event) => {
+        // Convert image to data URL.
+        for (const file of event.target.files) {
+            const reader = new FileReader();
+
+            reader.readAsDataURL(file);
+            reader.addEventListener("load", () => {
+                // Save data URL to chrome.storage.
+                let obj = {};
+                obj["board"] = reader.result;
+                chrome.storage.local.set(obj, function() {
+                    // 
+                });
+            });
+        }
+        showBoard();
+    },
+    false
+);
+
 window.onload = function() {
     showPieces();
+    showBoard();
 };

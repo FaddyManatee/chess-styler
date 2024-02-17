@@ -1,11 +1,12 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Chess.com Styler</title>
+    <title>Chess Styler</title>
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <div id="preview-pieces"></div>
+    <img id="board">
     <label>
       <abbr title="
 Upload the folder containing your custom pieces.
@@ -20,19 +21,11 @@ Names don't have to be case sensitive.
 etc...
 
 Accepted file types: .svg .png .jpeg">Pieces
-      </abbr>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&hairsp;&hairsp;&hairsp;&hairsp;
+      </abbr>&nbsp;&nbsp;&hairsp;&hairsp;
     </label>
-    <input id="upload-pieces" type="file" webkitdirectory directory>
-    <div class="square">
-      <label>Dark Squares&hairsp;&hairsp;</label>
-      <input type="color" title="Choose a colour for dark squares">
-      <input type="color" title="Choose a colour for dark square coordinates">
-    </div>
-    <div class="square">
-      <label>Light Squares</label>
-      <input type="color" title="Choose a colour for light squares">
-      <input type="color" title="Choose a colour for light square coordinates">
-    </div>
+    <input id="upload-pieces" type="file" webkitdirectory directory><br>
+    <label>Board&nbsp;&nbsp;&nbsp;&nbsp;</label>
+    <input id="upload-board" type="file">
     <button id="reset" title="Revert to your original chess.com theme">Reset</button>
     <script type="text/javascript" src="script.js"></script>
   </body>
