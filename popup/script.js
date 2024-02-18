@@ -98,6 +98,20 @@ document.getElementById("upload-board").addEventListener(
     false
 );
 
+document.getElementById("last-move").addEventListener(
+    "input",
+    (event) => {
+        let colour = event.target.value;
+
+        // Store the color value.
+        chrome.storage.local.set({"highlight": colour}, function() {
+            //
+        });
+    },
+    false
+);
+
+
 window.onload = function() {
     showPieces();
     showBoard();

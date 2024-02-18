@@ -36,7 +36,17 @@ window.onload = function() {
 
     let coord_light = null;
     let coord_dark = null;
+
     let highlight = null;
+    let highlight_p = new Promise((resolve, reject) => {
+        chrome.storage.local.get("highlight", function(result) {
+            if (result.highlight) {
+                highlight = result.highlight;
+            }
+            resolve();
+        });
+    });
+    promises.push(highlight_p);
 
     // All storage operations have completed. Safely access the 'pieces' object and 'board' variables.
     Promise.all(promises).then(() => {
@@ -63,12 +73,12 @@ window.onload = function() {
         //     }`;
         // }
     
-        // if (highlight) {
-        //     css += `
-        //     .highlight {
-        //         background-color: #a4b8c4 !important;
-        //     }`;
-        // }
+        if (highlight) {
+            css += `
+            .highlight {
+                background-color: ${highlight} !important;
+            }`;
+        }
     
         if (pieces["wp"]) {
             css += `
