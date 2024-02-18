@@ -77,7 +77,7 @@ window.onload = function() {
         if (highlight) {
             css += `
             .highlight {
-                background-color: ${highlight} !important;
+                background-color: ${highlight};
             }`;
         }
     
