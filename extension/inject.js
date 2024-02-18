@@ -1,83 +1,162 @@
 var pieces = {
-    "wp": "", "wb": "", "wn": "", "wr": "", "wq": "", "wk": "", 
-    "bp": "", "bb": "", "bn": "", "br": "", "bq": "", "bk": ""
+    "wp": null, "wb": null, "wn": null, "wr": null, "wq": null, "wk": null, 
+    "bp": null, "bb": null, "bn": null, "br": null, "bq": null, "bk": null
 };
 
+var root = document.documentElement;
+
 window.onload = function() {
+    let promises = [];
+
     for (let key in pieces) {
-        chrome.storage.local.get(key, function(result) {
-            let url = result[key];
-            if (url) {
-                pieces[key] = url;
-            }
+        let p = new Promise((resolve, reject) => {
+            chrome.storage.local.get(key, function(result) {
+                let url = result[key];
+                if (url) {
+                    pieces[key] = url;
+                    root.style.setProperty(`--theme-piece-set-${key}`, `url(${url})`);
+                }
+                resolve();
+            });
         });
+        promises.push(p);
     }
 
-    chrome.storage.local.get("board", function(result) {
-        let css = `
-        #board-single, .fade-in-overlay {
-            background-image: url(${result.board}) !important;
+    let board = null;
+    let board_p = new Promise((resolve, reject) => {
+        chrome.storage.local.get("board", function(result) {
+            if (result.board) {
+                board = result.board;
+                root.style.setProperty("--theme-board-style-image", `url(${result.board})`);
+            }
+            resolve();
+        });
+    });
+    promises.push(board_p);
+
+    let coord_light = null;
+    let coord_dark = null;
+    let highlight = null;
+
+    // All storage operations have completed. Safely access the 'pieces' object and 'board' variables.
+    Promise.all(promises).then(() => {
+        let css = "";
+    
+        if (board) {
+            css += `
+            .board {
+                background-image: url(${board}) !important;
+            }`;
         }
-        
-        .coordinate-light {
-            fill: #aaaaaa;
+    
+        // if (coord_light) {
+        //     css += `    
+        //     .coordinate-light {
+        //         fill: #aaaaaa !important;
+        //     }`;
+        // }
+    
+        // if (coord_dark) {
+        //     css += `
+        //     .coordinate-dark {
+        //         fill: #dcdcdc !important;
+        //     }`;
+        // }
+    
+        // if (highlight) {
+        //     css += `
+        //     .highlight {
+        //         background-color: #a4b8c4 !important;
+        //     }`;
+        // }
+    
+        if (pieces["wp"]) {
+            css += `
+            .piece.wp, .promotion-piece.wp {
+                background-image: url(${pieces["wp"]}) !important;
+            }`;
         }
-        
-        .coordinate-dark {
-            fill: #dcdcdc;
+    
+        if (pieces["wn"]) {
+            css += `
+            .piece.wn, .promotion-piece.wn {
+                background-image: url(${pieces["wn"]}) !important;
+            }`;    
         }
-        
-        .highlight {
-            background-color: #a4b8c4;
+    
+        if (pieces["wb"]) {
+            css += `
+            .piece.wb, .promotion-piece.wb {
+                background-image: url(${pieces["wb"]}) !important;
+            }`;    
         }
-        
-        #board-single .piece.wp, #board-single .promotion-piece.wp {
-            background-image: url(${pieces["wp"]}) !important;
+    
+        if (pieces["wr"]) {
+            css += `
+            .piece.wr, .promotion-piece.wr {
+                background-image: url(${pieces["wr"]}) !important;
+            }`;    
         }
-            
-        #board-single .piece.wn, #board-single .promotion-piece.wn {
-            background-image: url(${pieces["wn"]}) !important;
+    
+        if (pieces["wq"]) {
+            css += `
+            .piece.wq, .promotion-piece.wq {
+                background-image: url(${pieces["wq"]}) !important;
+            }`;   
         }
-            
-        #board-single .piece.wb, #board-single .promotion-piece.wb {
-            background-image: url(${pieces["wb"]}) !important;
+    
+        if (pieces["wk"]) {
+            css += `
+            .piece.wk, .promotion-piece.wk {
+                background-image: url(${pieces["wk"]}) !important;
+            }`;   
         }
-        
-        #board-single .piece.wr, #board-single .promotion-piece.wr {
-            background-image: url(${pieces["wr"]}) !important;
+    
+        //////////////////////////////////////////////////////////////
+    
+        if (pieces["bp"]) {
+            css += `
+            .piece.bp, .promotion-piece.bp {
+                background-image: url(${pieces["bp"]}) !important;
+            }`;
         }
-        
-        #board-single .piece.wq, #board-single .promotion-piece.wq {
-            background-image: url(${pieces["wq"]}) !important;
+    
+        if (pieces["bn"]) {
+            css += `
+            .piece.bn, .promotion-piece.bn {
+                background-image: url(${pieces["bn"]}) !important;
+            }`;    
         }
-        
-        #board-single .piece.wk, #board-single .promotion-piece.wk {
-            background-image: url(${pieces["wk"]}) !important;
+    
+        if (pieces["bb"]) {
+            css += `
+            .piece.bb, .promotion-piece.bb {
+                background-image: url(${pieces["bb"]}) !important;
+            }`;    
         }
-        
-        #board-single .piece.bp, #board-single .promotion-piece.bp {
-            background-image: url(${pieces["bp"]}) !important;
+    
+        if (pieces["br"]) {
+            css += `
+            .piece.br, .promotion-piece.br {
+                background-image: url(${pieces["br"]}) !important;
+            }`;    
         }
-            
-        #board-single .piece.bn, #board-single .promotion-piece.bn {
-            background-image: url(${pieces["bn"]}) !important;
+    
+        if (pieces["bq"]) {
+            css += `
+            .piece.bq, .promotion-piece.bq {
+                background-image: url(${pieces["bq"]}) !important;
+            }`;   
         }
-            
-        #board-single .piece.bb, #board-single .promotion-piece.bb {
-            background-image: url(${pieces["bb"]}) !important;
+    
+        if (pieces["bk"]) {
+            css += `
+            .piece.bk, .promotion-piece.bk {
+                background-image: url(${pieces["bk"]}) !important;
+            }`;   
         }
-        
-        #board-single .piece.br, #board-single .promotion-piece.br {
-            background-image: url(${pieces["br"]}) !important;
-        }
-        
-        #board-single .piece.bq, #board-single .promotion-piece.bq {
-            background-image: url(${pieces["bq"]}) !important;
-        }
-        
-        #board-single .piece.bk, #board-single .promotion-piece.bk {
-            background-image: url(${pieces["bk"]}) !important;
-        }`;
+    
+        console.log(css);
         
         let style = document.createElement("style");
         style.type = "text/css";
