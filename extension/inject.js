@@ -42,6 +42,7 @@ window.onload = function() {
         chrome.storage.local.get("highlight", function(result) {
             if (result.highlight) {
                 highlight = result.highlight;
+                root.style.setProperty("--theme-board-style-highlight-color", highlight);
             }
             resolve();
         });
@@ -165,9 +166,7 @@ window.onload = function() {
                 background-image: url(${pieces["bk"]}) !important;
             }`;   
         }
-    
-        console.log(css);
-        
+            
         let style = document.createElement("style");
         style.type = "text/css";
         
