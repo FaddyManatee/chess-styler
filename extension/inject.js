@@ -34,8 +34,29 @@ window.onload = function() {
     });
     promises.push(board_p);
 
-    let coord_light = null;
-    let coord_dark = null;
+    let dark_coord = null;
+    let dark_coord_p = new Promise((resolve, reject) => {
+        chrome.storage.local.get("dark_coord", function(result) {
+            if (result.dark_coord) {
+                dark_coord = result.dark_coord;
+                root.style.setProperty("--theme-board-style-coordinate-color-dark", dark_coord);
+            }
+            resolve();
+        });
+    });
+    promises.push(dark_coord_p);
+
+    let light_coord = null;
+    let light_coord_p = new Promise((resolve, reject) => {
+        chrome.storage.local.get("light_coord", function(result) {
+            if (result.light_coord) {
+                light_coord = result.light_coord;
+                root.style.setProperty("--theme-board-style-coordinate-color-light", light_coord);
+            }
+            resolve();
+        });
+    });
+    promises.push(light_coord_p);
 
     let highlight = null;
     let highlight_p = new Promise((resolve, reject) => {
@@ -60,19 +81,19 @@ window.onload = function() {
             }`;
         }
     
-        // if (coord_light) {
-        //     css += `    
-        //     .coordinate-light {
-        //         fill: #aaaaaa !important;
-        //     }`;
-        // }
+        if (light_coord) {
+            css += `    
+            .coordinate-light {
+                fill: ${light_coord} !important;
+            }`;
+        }
     
-        // if (coord_dark) {
-        //     css += `
-        //     .coordinate-dark {
-        //         fill: #dcdcdc !important;
-        //     }`;
-        // }
+        if (dark_coord) {
+            css += `
+            .coordinate-dark {
+                fill: ${dark_coord} !important;
+            }`;
+        }
     
         if (highlight) {
             css += `

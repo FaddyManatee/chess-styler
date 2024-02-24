@@ -111,6 +111,35 @@ document.getElementById("last-move").addEventListener(
     false
 );
 
+document.getElementById("last-move-reset").addEventListener("click", function() {
+    chrome.storage.local.remove("highlight", function() {
+        //
+    });
+});
+
+document.getElementById("dark-coord").addEventListener(
+    "input",
+    (event) => {
+        let colour = event.target.value;
+        chrome.storage.local.set({"dark_coord": colour});
+    },
+    false
+);
+
+document.getElementById("light-coord").addEventListener(
+    "input",
+    (event) => {
+        let colour = event.target.value;
+        chrome.storage.local.set({"light_coord": colour});
+    },
+    false
+);
+
+document.getElementById("coord-reset").addEventListener("click", function() {
+    chrome.storage.local.remove("dark_coord");
+    chrome.storage.local.remove("light_coord");
+});
+
 
 window.onload = function() {
     showPieces();
